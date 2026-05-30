@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} — Mini Blog{% endblock %}
+
+{% block content %}
+
+<div class="post-page">
+
+  <!-- ── Back navigation ───────────────────────────────────────────────── -->
+  <a href="{{ url_for('index') }}" class="back-link">
+    <span class="back-arrow">&#8592;</span> Back to all posts
+  </a>
+
+  <!-- ── Post hero header ──────────────────────────────────────────────── -->
+  <header class="post-hero">
+    <div class="post-hero-meta">
+      <span class="post-hero-date">{{ post.created_at }}</span>
+      <span class="post-hero-dot" aria-hidden="true">&middot;</span>
+      <span class="post-hero-read">{{ post.read_time }} min read</span>
+    </div>
+    <h1 class="post-hero-title">{{ post.title }}</h1>
+    <div class="post-hero-divider"></div>
+  </header>
+
+  <!-- ── Article body ──────────────────────────────────────────────────── -->
+  <article class="article-body">
+    {% for paragraph in post.content.split('\r\n\r\n') %}
+      {% set para = paragraph.strip() %}
+      {% if para %}
+        <p>{{ para | replace('\r\n', ' ') | replace('\n', ' ') }}</p>
+      {% endif %}
+    {% endfor %}
+  </article>
+
+  <!-- ── Bottom back link ──────────────────────────────────────────────── -->
+  <div class="post-footer-nav">
+    <a href="{{ url_for('index') }}" class="back-link">
+      <span class="back-arrow">&#8592;</span> Back to all posts
+    </a>
+  </div>
+
+  <!-- ── More posts ────────────────────────────────────────────────────── -->
+  {% if others %}
+  <section class="more-posts">
+    <h2 class="more-posts-heading">More Posts</h2>
+    <div class="more-posts-grid">
+      {% for p in others %}
+        <a href="{{ url_for('post_detail', post_id=p.id) }}" class="more-post-card">
+          <div class="more-post-card-inner">
+            <h3 class="more-post-title">{{ p.title }}</h3>
+            <p class="more-post-meta">{{ p.created_at }} &middot; {{ p.read_time }} min read</p>
+            <p class="more-post-snippet">{{ p.content[:120] | replace('\r\n', ' ') | replace('\n', ' ') }}{% if p.content|length > 120 %}…{% endif %}</p>
+            <span class="more-post-cta">Read more &#8594;</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+</div>
+
+{% endblock %}

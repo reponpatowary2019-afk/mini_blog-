@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Mini Blog{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Logo + wordmark -->
+      <a href="{{ url_for('index') }}" class="site-title">
+        <svg class="site-logo" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="#2563eb"/>
+          <rect x="8" y="10" width="20" height="3" rx="1.5" fill="white"/>
+          <rect x="8" y="16" width="14" height="3" rx="1.5" fill="white"/>
+          <rect x="8" y="22" width="17" height="3" rx="1.5" fill="white"/>
+        </svg>
+        Mini Blog
+      </a>
+      <!-- Tagline on the right -->
+      <p class="site-tagline">A simple Flask blog &mdash; no registration required</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    {# Flash messages (success / info) #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash flash--{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Mini Blog &mdash; Built with Flask &amp; Python &bull; Introduction to Web Architectures</p>
+    </div>
+  </footer>
+
+</body>
+</html>

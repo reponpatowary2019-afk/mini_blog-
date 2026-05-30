@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Mini Blog{% endblock %}
+
+{% block content %}
+
+<div class="blog-layout">
+
+  <!-- ── Left sidebar: post list ──────────────────────────────────────── -->
+  <aside class="post-sidebar">
+    <div class="sidebar-header">
+      <h2>Posts</h2>
+      <button class="btn-new-post" id="btnNewPost" title="Write a new post">&#43; New Post</button>
+    </div>
+
+    {% if posts %}
+      {% for post in posts %}
+        <div class="post-item" data-post-id="{{ post.id }}">
+          <div class="post-item-info">
+            <span class="post-item-title">{{ post.title }}</span>
+            <span class="post-item-date">{{ post.created_at }}</span>
+          </div>
+          <span class="post-item-arrow" aria-hidden="true">&#8250;</span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="no-posts">No posts yet.</p>
+    {% endif %}
+  </aside>
+
+  <!-- ── Right pane: detail or form ───────────────────────────────────── -->
+  <main class="detail-pane">
+
+    <!-- Add-post form (shown when "New Post" is clicked) -->
+    <section class="add-post" id="addPostPanel" style="display:none">
+      <h2>Add a New Post</h2>
+      <form method="POST" action="{{ url_for('index') }}" novalidate>
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value="{{ form_data.get('title', '') }}"
+            placeholder="Enter a post title"
+            maxlength="200"
+            class="{{ 'input-error' if errors.get('title') else '' }}"
+          />
+          {% if errors.get('title') %}
+            <span class="error-msg">{{ errors.title }}</span>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea
+            id="content"
+            name="content"
+            rows="6"
+            placeholder="Write your post content here…"
+            class="{{ 'input-error' if errors.get('content') else '' }}"
+          >{{ form_data.get('content', '') }}</textarea>
+          {% if errors.get('content') %}
+            <span class="error-msg">{{ errors.content }}</span>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn-submit">Publish Post</button>
+      </form>
+    </section>
+
+    <!-- Individual post detail panels -->
+    {% for post in posts %}
+      <article class="post-detail" id="post-{{ post.id }}" style="display:none">
+        <h2 class="detail-title">{{ post.title }}</h2>
+        <p class="detail-meta">Published on {{ post.created_at }}</p>
+        <div class="detail-content">{{ post.content }}</div>
+        <a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn-read-full">
+          Read full post &#8594;
+        </a>
+      </article>
+    {% endfor %}
+
+    <!-- Default / empty state -->
+    <div class="detail-placeholder" id="detailPlaceholder">
+      <div class="placeholder-inner">
+        <span class="placeholder-icon">&#128196;</span>
+        <p>Select a post from the left to read it,<br>or click <strong>+ New Post</strong> to write one.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  (function () {
+    var items    = document.querySelectorAll('.post-item');
+    var details  = document.querySelectorAll('.post-detail');
+    var addPanel = document.getElementById('addPostPanel');
+    var placeholder = document.getElementById('detailPlaceholder');
+    var btnNew   = document.getElementById('btnNewPost');
+
+    function hideAll() {
+      details.forEach(function (el) { el.style.display = 'none'; });
+      addPanel.style.display = 'none';
+      placeholder.style.display = 'none';
+      items.forEach(function (el) { el.classList.remove('active'); });
+    }
+
+    function showPost(id) {
+      hideAll();
+      var panel = document.getElementById('post-' + id);
+      if (panel) { panel.style.display = 'block'; }
+      var item = document.querySelector('[data-post-id="' + id + '"]');
+      if (item) { item.classList.add('active'); }
+    }
+
+    items.forEach(function (item) {
+      item.addEventListener('click', function () {
+        showPost(this.dataset.postId);
+      });
+    });
+
+    btnNew.addEventListener('click', function () {
+      hideAll();
+      addPanel.style.display = 'block';
+      this.classList.add('active');
+    });
+
+    // On page load: if there were validation errors, open the form;
+    // otherwise open the first post (if any).
+    var hasErrors = {{ 'true' if errors else 'false' }};
+    if (hasErrors) {
+      hideAll();
+      addPanel.style.display = 'block';
+      btnNew.classList.add('active');
+    } else if (items.length > 0) {
+      showPost(items[0].dataset.postId);
+    } else {
+      placeholder.style.display = 'flex';
+    }
+  })();
+</script>
+
+{% endblock %}

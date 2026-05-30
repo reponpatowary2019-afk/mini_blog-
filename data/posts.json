@@ -1,0 +1,50 @@
+[
+  {
+    "id": "b1a93082-c311-4988-936a-20e0868de0a3",
+    "title": "Testiong",
+    "content": "Brief history of MVC Framework\r\nThe history of web applications is a long one, but it began with the introduction of the first web browser in 1993. This was Netscape Navigator, which provided users with an easy way to access information on the Internet without having to know how to code HTML or any other language. As more and more people started accessing the web and interacting online, companies began noticing that they needed new ways to build their websites to make them more user-friendly.\r\n\r\nThis led to the introduction of the Model-View-Controller (MVC) framework, which provided a simple way for web developers to create complex applications. The MVC framework was first introduced by Trygve Reenskaug in 1979 as a way to manage interactions between users and computers and is still used today.\r\nHigh-level overview of the MVC architecture\r\nThe MVC framework is a software architecture that separates the user interface (UI), data storage, and business logic into three separate components. This allows developers to work on each component independently without affecting the other two parts of the application.\r\n\r\nThe MVC framework consists of three main components:\r\n\r\nModel\r\nThe model represents the data logic and data that is stored in your application. This can be a simple data structure like an array or dictionary, or it can be a complex data set with properties and methods. The model typically stores information about what happened in one or more events, such as user input or database queries.\r\n\r\nThe model also provides a way to access data from the UI. This includes storing user input, retrieving data from the database, and performing other tasks that are necessary for your application’s functionality.\r\n\r\nView\r\nThe view is where your application’s user interface lives and this is what the user sees. It takes the data provided by the model and displays it on screen in a way that users can interact with. The view typically contains HTML markup, CSS styles, and JavaScript code that provides interactive functionality like form validation or drag-and-drop interactions.\r\n\r\nIt is important to note that the view does not contain any logic. It only displays data and handles user input.\r\n\r\nController\r\nThe controller is a component that sits between the model and the view. It is responsible for handling user interaction with the view, as well as performing any logic necessary to prepare data for display. In larger programs, the controller effectively becomes the contract between product intent, UX behavior, and implementation; when collaborating across organizations, shortlisting custom web application development firms that match your quality bar can reduce integration risk. For example, if a user clicks on a button in your application’s UI, this will trigger an event in JavaScript which will be handled by the controller—in turn, it can use this information to retrieve data from the database or perform other tasks.",
+    "created_at": "April 29, 2026"
+  },
+  {
+    "id": "7f3483f7-1e2f-420b-bedf-9832e04b2d54",
+    "title": "MVC App Architecture",
+    "content": "Brief history of MVC Framework\r\nThe history of web applications is a long one, but it began with the introduction of the first web browser in 1993. This was Netscape Navigator, which provided users with an easy way to access information on the Internet without having to know how to code HTML or any other language. As more and more people started accessing the web and interacting online, companies began noticing that they needed new ways to build their websites to make them more user-friendly.\r\n\r\nThis led to the introduction of the Model-View-Controller (MVC) framework, which provided a simple way for web developers to create complex applications. The MVC framework was first introduced by Trygve Reenskaug in 1979 as a way to manage interactions between users and computers and is still used today.",
+    "created_at": "April 29, 2026"
+  },
+  {
+    "id": "8517319f-29f9-441d-900a-8c02eb905391",
+    "title": "Test Post from Script",
+    "content": "Verifies the form submission path.",
+    "created_at": "April 29, 2026"
+  },
+  {
+    "id": "1165ed9a-7c66-4718-a650-f3c36c03161c",
+    "title": "Test Post from Script",
+    "content": "This verifies the form submission path.",
+    "created_at": "April 29, 2026"
+  },
+  {
+    "id": "seed-001",
+    "title": "Welcome to Mini Blog",
+    "content": "This is the first post on our mini blog built with Flask. It demonstrates how posts are stored in a JSON file and rendered through Jinja2 templates without requiring a full database engine.",
+    "created_at": "April 29, 2026"
+  },
+  {
+    "id": "seed-002",
+    "title": "Understanding Flask MTV Architecture",
+    "content": "Flask follows the MTV (Model-Template-View) pattern. The model manages data, templates handle presentation, and views (route functions) process HTTP requests and return responses. This app keeps each layer clearly separated so the flow is easy to trace.",
+    "created_at": "April 28, 2026"
+  },
+  {
+    "id": "seed-003",
+    "title": "HTML Forms and HTTP POST Requests",
+    "content": "HTML forms submit data using HTTP POST requests. Flask reads submitted values via request.form, validates them on the server side, and either saves the new post or returns validation errors to the user — all without any JavaScript.",
+    "created_at": "April 27, 2026"
+  },
+  {
+    "id": "seed-004",
+    "title": "Why JSON Storage Works for Small Apps",
+    "content": "For a simple blog with no concurrent writes, a JSON file is a perfectly reasonable storage choice. It is human-readable, requires zero configuration, and can be swapped for SQLite later by replacing only the load_posts and save_posts helper functions in app.py.",
+    "created_at": "April 26, 2026"
+  }
+]
